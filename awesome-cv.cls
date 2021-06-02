@@ -161,7 +161,7 @@
 %                Configuration for fonts
 %-------------------------------------------------------------------------------
 % Set the FontAwesome font to be up-to-date.
-\newfontfamily\FA[Path=\@fontdir]{FontAwesome}
+%\newfontfamily\FA[Path=\@fontdir]{FontAwesome}
 % Set font for header (default is Roboto)
 \newfontfamily\headerfont[
   Path=\@fontdir,
@@ -222,6 +222,10 @@
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+
+% For elements of presentation
+\newcommand*{\presentationtypestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\presentationsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
@@ -608,6 +612,8 @@
   \end{tabular*}%
 }
 
+
+
 % Define an environment for cvsubentry
 \newenvironment{cvsubentries}{%
   \begin{center}
@@ -657,7 +663,7 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l L{\textwidth * \real{0.85}}}
 }{%
     \end{tabular*}
   \end{center}
@@ -665,8 +671,32 @@
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
+    %\cline{2-2}
 	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+    %\cline{2-2}
 }
+
+
+% Define an environment for cvpresentation
+\newenvironment{cvpresentations}{%
+    \vspace{\acvSectionContentTopSkip}
+    \vspace{-2.0mm}
+    \begin{center}
+        \setlength\tabcolsep{1ex}
+        \setlength{\extrarowheight}{0pt}
+        \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth * \real{0.85}}}
+        }{%
+        \end{tabular*}
+    \end{center}
+}
+% Define a line of cv information(skill)
+% Usage: \cvpresentation{<type>}{<skillset>}
+\newcommand*{\cvpresentation}[2]{%
+    %\cline{2-2}
+    \presentationtypestyle{#1} & \presentationsetstyle{#2} \\
+    %\cline{2-2}
+}
+
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
@@ -681,6 +711,19 @@
   \vspace{-4.0mm}
 }
 
+
+% Define an environment for publication items (for cventry)
+\newenvironment{pubitems}{%
+    \vspace{-1.0mm}
+    \begin{justify}
+        \begin{itemize}[leftmargin=4ex, nosep, noitemsep]
+            \setlength{\parskip}{2pt}\footnotesize
+            \renewcommand{\labelitemi}{\bullet}
+        }{%
+        \end{itemize}
+    \end{justify}
+    %\vspace{-4.0mm}
+}
 
 %-------------------------------------------------------------------------------
 %                Commands for elements of Cover Letter
